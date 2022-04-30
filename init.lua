@@ -1,9 +1,27 @@
--- example file i.e lua/custom/init.lua
+return {
 
--- MAPPINGS
-local map = require("core.utils").map
+  ["williamboman/nvim-lsp-installer"] = {
+    config = function()
+      require("nvim-lsp-installer").setup {}
+    end
+  },
+  ["windwp/nvim-ts-autotag"] = {
+      ft = { "html", "javascriptreact" },
+      after = "nvim-treesitter",
+      config = function()
+         require("nvim-ts-autotag").setup()
+      end,
+   },
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+      after = "nvim-lspconfig",
+      config = function()
+         require("custom.plugins.null-ls").setup()
+      end,
+  },
 
-map("n", "<leader>cc", ":Telescope <CR>")
-map("n", "<leader>q", ":q <CR>")
-
--- require("my autocmds file") or just declare them here
+  ["ur4ltz/surround.nvim"] = {
+    config = function()
+      require"surround".setup {mappings_style="surround"}
+    end,
+  },
+}
